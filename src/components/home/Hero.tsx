@@ -19,12 +19,12 @@ export function Hero() {
   const imageY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 80]);
 
   return (
-    <section ref={ref} className="relative overflow-hidden bg-sand">
+    <section ref={ref} className="relative overflow-hidden bg-hero">
       {/* Desktop: exactly one screen tall below the 4rem navbar, so nothing needs scrolling. */}
-      <div className="mx-auto grid max-w-6xl items-center gap-6 px-4 pb-12 pt-8 md:h-[calc(100svh-4rem)] md:min-h-[32rem] md:max-h-[56rem] md:grid-cols-[1.1fr_1fr] md:gap-10 md:px-8 md:py-6">
+      <div className="mx-auto grid max-w-6xl items-center gap-6 px-4 pb-12 pt-8 md:h-[calc(100svh-4rem)] md:min-h-[32rem] md:max-h-[56rem] md:grid-cols-[1fr_1.15fr] md:gap-6 md:px-8 md:py-0">
         <div>
           <p className="anim-rise text-xs font-semibold uppercase tracking-[0.25em] text-brand/70">Signature Ryze</p>
-          <h1 className="mt-4 font-display text-5xl font-extrabold leading-[1.02] text-brand sm:text-6xl md:text-[clamp(3rem,min(9vh,5.6vw),5.25rem)]">
+          <h1 className="mt-4 font-display text-5xl font-extrabold leading-[1.02] text-brand sm:text-6xl md:text-[clamp(3rem,min(9vh,5vw),5.25rem)]">
             {HEADLINE.map((line, i) => (
               <span key={line} className="block overflow-hidden pb-1">
                 <span className="anim-line block" style={delay(0.1 + i * 0.12)}>
@@ -47,16 +47,22 @@ export function Hero() {
           </div>
         </div>
 
-        <motion.div style={{ y: imageY }} className="relative mx-auto h-full w-full max-w-sm md:max-w-none">
-          <div className="anim-pop relative aspect-[4/5] w-full md:aspect-auto md:h-full" style={delay(0.2)}>
-            <Image
-              src="/hero/hero.webp"
-              alt="Iced Aren Latte dan Iced Spanish Latte dari Ryze Coffee"
-              fill
-              priority
-              sizes="(min-width: 768px) 45vw, 90vw"
-              className="object-contain"
-            />
+        <motion.div style={{ y: imageY }} className="relative mx-auto h-full w-full max-w-md md:max-w-none">
+          {/* On desktop the photo spills a little past its column so the cups read large. */}
+          <div
+            className="anim-pop relative aspect-[4/5] w-full md:absolute md:inset-y-0 md:-left-6 md:-right-10 md:aspect-auto md:w-auto lg:-right-24"
+            style={delay(0.2)}
+          >
+            <div className="anim-drift relative h-full w-full">
+              <Image
+                src="/hero/hero.webp"
+                alt="Iced Aren Latte dan Iced Spanish Latte dari Ryze Coffee"
+                fill
+                priority
+                sizes="(min-width: 768px) 55vw, 90vw"
+                className="object-contain"
+              />
+            </div>
           </div>
         </motion.div>
       </div>
