@@ -1,10 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useRef, type CSSProperties } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { getMenuItem } from "@/lib/menu";
-import { FloatingCard } from "./FloatingCard";
 
 const HEADLINE = ["Iced", "Spanish Latte"];
 const COPY =
@@ -16,41 +15,16 @@ export function Hero() {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  // Parallax: the video frame trails the text slightly while scrolling.
-  const frameY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 80]);
-
-  const spanish = getMenuItem("spanish-latte")!;
-  const matcha = getMenuItem("matcha-cloud")!;
-
-  // The looping video must be stoppable (WCAG 2.2.2) and stays still for reduced-motion users.
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [paused, setPaused] = useState(false);
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!reduce || !video) return;
-    video.autoplay = false;
-    video.pause();
-    setPaused(true);
-  }, [reduce]);
-
-  const togglePlayback = () => {
-    const video = videoRef.current;
-    if (!video) return;
-    if (paused) {
-      void video.play()?.catch(() => {});
-      setPaused(false);
-    } else {
-      video.pause();
-      setPaused(true);
-    }
-  };
+  // Parallax: the photo trails the text slightly while scrolling.
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 80]);
 
   return (
-    <section ref={ref} className="relative overflow-hidden bg-cream">
-      <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 pb-16 pt-10 md:min-h-[min(calc(100svh-4rem),52rem)] md:grid-cols-[1.1fr_1fr] md:gap-16 md:px-8 md:py-16">
+    <section ref={ref} className="relative overflow-hidden bg-sand">
+      {/* Desktop: exactly one screen tall below the 4rem navbar, so nothing needs scrolling. */}
+      <div className="mx-auto grid max-w-6xl items-center gap-6 px-4 pb-12 pt-8 md:h-[calc(100svh-4rem)] md:min-h-[32rem] md:max-h-[56rem] md:grid-cols-[1.1fr_1fr] md:gap-10 md:px-8 md:py-6">
         <div>
           <p className="anim-rise text-xs font-semibold uppercase tracking-[0.25em] text-brand/70">Signature Ryze</p>
-          <h1 className="mt-4 font-display text-5xl font-extrabold leading-[1.02] text-brand sm:text-6xl lg:text-7xl">
+          <h1 className="mt-4 font-display text-5xl font-extrabold leading-[1.02] text-brand sm:text-6xl md:text-[clamp(3rem,min(9vh,5.6vw),5.25rem)]">
             {HEADLINE.map((line, i) => (
               <span key={line} className="block overflow-hidden pb-1">
                 <span className="anim-line block" style={delay(0.1 + i * 0.12)}>
@@ -60,47 +34,30 @@ export function Hero() {
               </span>
             ))}
           </h1>
-          <p className="anim-rise mt-6 max-w-md text-base leading-relaxed text-ink/75 md:text-lg" style={delay(0.35)}>
+          <p className="anim-rise mt-5 max-w-md text-base leading-relaxed text-ink/75 lg:text-lg" style={delay(0.35)}>
             {COPY}
           </p>
           <div className="anim-rise" style={delay(0.5)}>
             <Link
               href="/menu"
-              className="mt-8 inline-flex items-center gap-2 rounded-full bg-brand px-7 py-3.5 text-sm font-semibold text-cream shadow-lg shadow-brand/20 transition hover:-translate-y-0.5 hover:bg-brand/90"
+              className="mt-7 inline-flex items-center gap-2 rounded-full bg-brand px-7 py-3.5 text-sm font-semibold text-cream shadow-lg shadow-brand/20 transition hover:bg-brand/90 motion-safe:hover:-translate-y-0.5"
             >
               Lihat Menu <span aria-hidden>→</span>
             </Link>
           </div>
         </div>
 
-        <motion.div style={{ y: frameY }} className="relative mx-auto w-full max-w-sm md:max-w-md">
-          <div className="anim-pop" style={delay(0.2)}>
-            <div className="relative aspect-[3/4] overflow-hidden rounded-3xl bg-coffee shadow-2xl shadow-coffee/30 md:rounded-[50%_50%_1.5rem_1.5rem/37.5%_37.5%_1.5rem_1.5rem]">
-              <video
-                ref={videoRef}
-                className="h-full w-full object-cover"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                poster="/video/hero-poster.webp"
-                aria-hidden="true"
-              >
-                <source src="/video/hero.mp4" type="video/mp4" />
-              </video>
-              <button
-                type="button"
-                onClick={togglePlayback}
-                aria-label={paused ? "Putar video" : "Jeda video"}
-                className="absolute bottom-4 left-1/2 grid h-10 w-10 -translate-x-1/2 place-items-center rounded-full bg-black/40 text-sm text-white backdrop-blur transition hover:bg-black/60 focus-visible:outline-2 focus-visible:outline-white"
-              >
-                <span aria-hidden>{paused ? "▶" : "❚❚"}</span>
-              </button>
-            </div>
+        <motion.div style={{ y: imageY }} className="relative mx-auto h-full w-full max-w-sm md:max-w-none">
+          <div className="anim-pop relative aspect-[4/5] w-full md:aspect-auto md:h-full" style={delay(0.2)}>
+            <Image
+              src="/hero/hero.webp"
+              alt="Iced Aren Latte dan Iced Spanish Latte dari Ryze Coffee"
+              fill
+              priority
+              sizes="(min-width: 768px) 45vw, 90vw"
+              className="object-contain"
+            />
           </div>
-          <FloatingCard item={spanish} className="-left-2 top-[38%] md:-left-12" />
-          <FloatingCard item={matcha} delay={0.4} className="-right-2 bottom-10 md:-right-10" />
         </motion.div>
       </div>
     </section>

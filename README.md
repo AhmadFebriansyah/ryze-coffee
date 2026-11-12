@@ -22,7 +22,7 @@ Perintah lain:
 | `npm run lint` | memeriksa kode (ESLint) |
 | `npm run build` | build versi produksi |
 | `npm start` | menjalankan hasil build |
-| `npm run placeholders` | membuat ulang gambar pengganti menu, poster video, dan `og.png` |
+| `npm run placeholders` | membuat ulang gambar pengganti menu dan `og.png` |
 
 > **Catatan Windows:** jalankan `npm test` dari folder dengan huruf drive **besar** (`D:\belajar\coffee`,
 > bukan `d:\...`). Jika huruf drive kecil, Vitest memuat dirinya dua kali dan muncul error aneh seperti
@@ -53,10 +53,11 @@ Format lain (`.jpg`/`.png`)? Ubah juga nilai `image` menu tersebut di `data/menu
 
 > Jangan jalankan `npm run placeholders` setelah memasang foto asli — skrip itu menimpa semua foto menu.
 
-## Mengganti video pembuka
+## Mengganti foto pembuka & interior
 
-- Video: `public/video/hero.mp4` (saat ini klip dari Pexels, 1080×1920, ±3,9 MB). Usahakan < 4 MB, tanpa suara.
-- Poster (tampil sebelum video berputar): `public/video/hero-poster.webp`. Sebaiknya frame pertama video.
+- Foto pembuka (Beranda, kanan): `public/hero/hero.webp`, tegak 4:5, latar polos warna `#F7E6D1` agar menyatu dengan latar halaman.
+- Foto interior toko (di bawah *Our Story*): `public/story/interior.webp`, lebar 16:9 atau lebih.
+- Format lain? Simpan dengan nama sama berekstensi .webp, atau ubah path di `src/components/home/Hero.tsx` / `StoryTeaser.tsx`.
 
 ## Deploy ke Vercel (gratis)
 
@@ -81,7 +82,8 @@ Jalankan `npm run build && npm start`, buka `http://localhost:3000` di Chrome �
 ```
 data/                  isi menu & toko (JSON)
 public/menu/           foto menu
-public/video/          video & poster pembuka
+public/hero/           foto pembuka
+public/story/          foto interior
 scripts/               skrip pembuat gambar pengganti
 src/app/               halaman (/, /tentang, /menu, /toko)
 src/components/        komponen per bagian (home, menu, about, stores, layout, ui)
@@ -92,4 +94,4 @@ docs/superpowers/      dokumen desain & rencana pengerjaan
 
 ---
 
-Ryze Coffee adalah brand fiktif. Video pembuka dari [Pexels](https://www.pexels.com) (lisensi bebas pakai).
+Ryze Coffee adalah brand fiktif. Foto produk dibuat dengan AI.

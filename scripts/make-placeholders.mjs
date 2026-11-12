@@ -1,6 +1,7 @@
 // Generates uniform placeholder images until the real (AI) photos are ready.
 // Run: npm run placeholders
 import { mkdir, readFile } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 
 const root = new URL("../", import.meta.url);
@@ -46,27 +47,13 @@ function cupSvg(item) {
 </svg>`;
 }
 
-function posterSvg() {
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="720" height="960" viewBox="0 0 720 960">
-  <defs>
-    <radialGradient id="g" cx="0.5" cy="0.65" r="0.75">
-      <stop offset="0" stop-color="#6a4429"/><stop offset="1" stop-color="#1c100a"/>
-    </radialGradient>
-  </defs>
-  <rect width="720" height="960" fill="url(#g)"/>
-</svg>`;
-}
-
 await mkdir(new URL("public/menu/", root), { recursive: true });
-await mkdir(new URL("public/video/", root), { recursive: true });
 
 for (const item of menu) {
-  const out = new URL(`public/menu/${item.id}.webp`, root);
-  await sharp(Buffer.from(cupSvg(item))).webp({ quality: 82 }).toFile(out.pathname.replace(/^\/([A-Za-z]:)/, "$1"));
+  await sharp(Buffer.from(cupSvg(item)))
+    .webp({ quality: 82 })
+    .toFile(fileURLToPath(new URL(`public/menu/${item.id}.webp`, root)));
 }
-await sharp(Buffer.from(posterSvg()))
-  .webp({ quality: 80 })
-  .toFile(new URL("public/video/hero-poster.webp", root).pathname.replace(/^\/([A-Za-z]:)/, "$1"));
 
 const ogSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <rect width="1200" height="630" fill="#efe2cf"/>
@@ -76,8 +63,6 @@ const ogSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630"
   <text x="80" y="440" font-family="Georgia, serif" font-size="96" font-weight="700" fill="#1f4d3a">Spanish Latte</text>
   <text x="80" y="530" font-family="Arial, sans-serif" font-size="30" fill="#7a6a5c">Kopi racikan biji Nusantara pilihan</text>
 </svg>`;
-await sharp(Buffer.from(ogSvg))
-  .png()
-  .toFile(new URL("public/og.png", root).pathname.replace(/^\/([A-Za-z]:)/, "$1"));
+await sharp(Buffer.from(ogSvg)).png().toFile(fileURLToPath(new URL("public/og.png", root)));
 
-console.log(`Generated ${menu.length} menu placeholders + hero poster + og image.`);
+console.log(`Generated ${menu.length} menu placeholders + og image.`);

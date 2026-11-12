@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 
@@ -5,7 +6,7 @@ export function StoryTeaser() {
   return (
     <section className="mx-auto max-w-6xl px-4 py-20 md:px-8 md:py-28">
       <Reveal className="grid gap-8 md:grid-cols-[1fr_1.3fr] md:gap-16">
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand/70">Tentang Ryze</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand/70">Our Story</p>
         <div>
           <h2 className="font-display text-3xl font-extrabold leading-tight text-brand md:text-5xl">
             Dari kebun Nusantara, sampai ke genggamanmu.
@@ -21,6 +22,15 @@ export function StoryTeaser() {
             Baca cerita kami <span aria-hidden>→</span>
           </Link>
         </div>
+      </Reveal>
+      <Reveal className="relative mt-14 aspect-[4/3] overflow-hidden rounded-[2rem] bg-cream shadow-xl shadow-coffee/10 md:mt-20 md:aspect-[21/9]">
+        <Image
+          src="/story/interior.webp"
+          alt="Suasana interior toko Ryze Coffee yang modern dan hangat"
+          fill
+          sizes="(min-width: 1152px) 1088px, 100vw"
+          className="object-cover"
+        />
       </Reveal>
     </section>
   );

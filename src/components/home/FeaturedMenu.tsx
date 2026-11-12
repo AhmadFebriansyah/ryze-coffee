@@ -21,7 +21,7 @@ export function FeaturedMenu() {
           {featured.map((item) => (
             <li key={item.id}>
               <Reveal>
-                <MenuCard item={item} href={`/menu?item=${item.id}`} />
+                <MenuCard item={item} href={`/menu#${item.id}`} />
               </Reveal>
             </li>
           ))}

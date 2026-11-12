@@ -3,18 +3,15 @@ import Link from "next/link";
 import { formatRupiah } from "@/lib/format";
 import { BADGE_LABEL, type MenuItem } from "@/lib/menu";
 
-/** keepScroll: stay at the current scroll position (used inside the catalog, where the link only opens the detail). */
-type MenuCardProps = { item: MenuItem; href: string; priority?: boolean; keepScroll?: boolean };
+type MenuCardProps = { item: MenuItem; href: string; priority?: boolean };
 
-export function MenuCard({ item, href, priority = false, keepScroll = false }: MenuCardProps) {
+export function MenuCard({ item, href, priority = false }: MenuCardProps) {
   return (
     <Link
       href={href}
-      scroll={!keepScroll}
-      data-item={item.id}
       className="group block rounded-3xl bg-white p-3 shadow-[0_2px_12px_rgba(42,29,20,0.06)] transition hover:shadow-[0_12px_32px_rgba(42,29,20,0.12)] motion-safe:hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
     >
-      <div className="relative aspect-square overflow-hidden rounded-2xl bg-cream">
+      <div className="relative aspect-square overflow-hidden rounded-2xl bg-sand">
         <Image
           src={item.image}
           alt={item.name}
