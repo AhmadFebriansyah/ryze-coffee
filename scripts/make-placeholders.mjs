@@ -68,4 +68,16 @@ await sharp(Buffer.from(posterSvg()))
   .webp({ quality: 80 })
   .toFile(new URL("public/video/hero-poster.webp", root).pathname.replace(/^\/([A-Za-z]:)/, "$1"));
 
-console.log(`Generated ${menu.length} menu placeholders + hero poster.`);
+const ogSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#efe2cf"/>
+  <circle cx="1040" cy="120" r="260" fill="#1f4d3a" opacity="0.08"/>
+  <text x="80" y="150" font-family="Georgia, serif" font-size="40" font-weight="700" fill="#1f4d3a">Ryze Coffee</text>
+  <text x="80" y="330" font-family="Georgia, serif" font-size="96" font-weight="700" fill="#1f4d3a">Iced</text>
+  <text x="80" y="440" font-family="Georgia, serif" font-size="96" font-weight="700" fill="#1f4d3a">Spanish Latte</text>
+  <text x="80" y="530" font-family="Arial, sans-serif" font-size="30" fill="#7a6a5c">Kopi racikan biji Nusantara pilihan</text>
+</svg>`;
+await sharp(Buffer.from(ogSvg))
+  .png()
+  .toFile(new URL("public/og.png", root).pathname.replace(/^\/([A-Za-z]:)/, "$1"));
+
+console.log(`Generated ${menu.length} menu placeholders + hero poster + og image.`);

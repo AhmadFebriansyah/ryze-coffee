@@ -16,7 +16,13 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+// On Vercel this resolves to the production *.vercel.app domain; locally to localhost.
+const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
+  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  : "http://localhost:3000";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: { default: "Ryze Coffee", template: "%s · Ryze Coffee" },
   description:
     "Ryze Coffee — kopi racikan biji Nusantara pilihan. Lihat menu signature kami, kenali cerita kami, dan temukan toko terdekat.",
@@ -24,6 +30,7 @@ export const metadata: Metadata = {
     siteName: "Ryze Coffee",
     locale: "id_ID",
     type: "website",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Ryze Coffee — Iced Spanish Latte" }],
   },
 };
 
