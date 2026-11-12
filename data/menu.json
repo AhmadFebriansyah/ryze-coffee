@@ -1,0 +1,113 @@
+[
+  {
+    "id": "spanish-latte",
+    "name": "Spanish Latte",
+    "category": "signature",
+    "price": 30000,
+    "description": "Racikan espresso pilihan berpadu dengan susu manis, menghasilkan rasa creamy yang lembut namun tetap ringan. Sekali teguk, langsung jatuh hati.",
+    "image": "/menu/spanish-latte.webp",
+    "badge": "best-seller",
+    "featured": true
+  },
+  {
+    "id": "aren-latte",
+    "name": "Aren Latte",
+    "category": "signature",
+    "price": 28000,
+    "description": "Gula aren asli yang legit bertemu espresso dan susu segar. Manisnya hangat, aromanya karamel, rasanya seperti pulang ke rumah.",
+    "image": "/menu/aren-latte.webp",
+    "featured": true
+  },
+  {
+    "id": "caramel-cloud-latte",
+    "name": "Caramel Cloud Latte",
+    "category": "signature",
+    "price": 32000,
+    "description": "Latte dingin bermahkota foam karamel yang selembut awan. Tiap tegukan dimulai manis, lalu ditutup dengan espresso yang tegas.",
+    "image": "/menu/caramel-cloud-latte.webp",
+    "featured": true
+  },
+  {
+    "id": "ryze-butterscotch",
+    "name": "Ryze Butterscotch",
+    "category": "signature",
+    "price": 33000,
+    "description": "Saus butterscotch buatan sendiri dengan sentuhan garam laut, dipadukan espresso dan susu. Gurih, manis, dan bikin nagih.",
+    "image": "/menu/ryze-butterscotch.webp",
+    "badge": "new",
+    "featured": false
+  },
+  {
+    "id": "americano",
+    "name": "Americano",
+    "category": "classic",
+    "price": 22000,
+    "description": "Dua shot espresso dari biji Gayo yang disajikan dengan air dingin. Bersih, segar, dengan akhir rasa cokelat yang samar.",
+    "image": "/menu/americano.webp",
+    "featured": false
+  },
+  {
+    "id": "cappuccino",
+    "name": "Cappuccino",
+    "category": "classic",
+    "price": 27000,
+    "description": "Espresso, susu, dan foam tebal dalam takaran seimbang. Klasik yang tidak pernah salah untuk menemani pagi.",
+    "image": "/menu/cappuccino.webp",
+    "featured": false
+  },
+  {
+    "id": "cafe-latte",
+    "name": "Café Latte",
+    "category": "classic",
+    "price": 27000,
+    "description": "Espresso lembut yang dibalut susu segar. Ringan, halus, dan pas dinikmati kapan saja.",
+    "image": "/menu/cafe-latte.webp",
+    "featured": false
+  },
+  {
+    "id": "espresso",
+    "name": "Espresso",
+    "category": "classic",
+    "price": 18000,
+    "description": "Satu shot pekat dari house blend Ryze dengan crema keemasan. Untuk kamu yang suka kopi apa adanya.",
+    "image": "/menu/espresso.webp",
+    "featured": false
+  },
+  {
+    "id": "matcha-cloud",
+    "name": "Matcha Cloud",
+    "category": "non-coffee",
+    "price": 32000,
+    "description": "Matcha Jepang yang dikocok segar di atas susu dingin, dengan cold foam vanila yang lembut. Earthy, manis, dan menyegarkan.",
+    "image": "/menu/matcha-cloud.webp",
+    "badge": "new",
+    "featured": true
+  },
+  {
+    "id": "chocolate-velvet",
+    "name": "Chocolate Velvet",
+    "category": "non-coffee",
+    "price": 28000,
+    "description": "Cokelat pekat yang meleleh dalam susu segar. Tebal, lembut, dan memanjakan seperti dessert dalam gelas.",
+    "image": "/menu/chocolate-velvet.webp",
+    "featured": false
+  },
+  {
+    "id": "red-velvet-latte",
+    "name": "Red Velvet Latte",
+    "category": "non-coffee",
+    "price": 29000,
+    "description": "Perpaduan kakao dan sentuhan vanila dengan warna merah yang memikat. Manis lembut dengan aroma kue yang baru keluar dari oven.",
+    "image": "/menu/red-velvet-latte.webp",
+    "featured": false
+  },
+  {
+    "id": "lychee-tea",
+    "name": "Lychee Tea",
+    "category": "non-coffee",
+    "price": 24000,
+    "description": "Teh hitam dingin dengan buah leci utuh. Segar, wangi, dan ringan untuk siang yang terik.",
+    "image": "/menu/lychee-tea.webp",
+    "featured": false
+  }
+]
