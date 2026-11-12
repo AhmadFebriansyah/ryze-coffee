@@ -2,10 +2,10 @@ import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 
-const nav = vi.hoisted(() => ({ params: new URLSearchParams(), replace: vi.fn() }));
+const nav = vi.hoisted(() => ({ params: new URLSearchParams(), replace: vi.fn(), back: vi.fn() }));
 vi.mock("next/navigation", () => ({
   useSearchParams: () => nav.params,
-  useRouter: () => ({ replace: nav.replace, push: vi.fn(), prefetch: vi.fn() }),
+  useRouter: () => ({ replace: nav.replace, back: nav.back, push: vi.fn(), prefetch: vi.fn() }),
   usePathname: () => "/menu",
 }));
 
@@ -15,6 +15,7 @@ import { getMenu, getMenuItem } from "@/lib/menu";
 function renderWith(query: string) {
   nav.params = new URLSearchParams(query);
   nav.replace.mockClear();
+  nav.back.mockClear();
   return render(<MenuCatalog items={getMenu()} />);
 }
 
@@ -93,5 +94,24 @@ describe("MenuCatalog", () => {
   it("moves focus to the close button when opened", () => {
     renderWith("item=matcha-cloud");
     expect(screen.getByRole("button", { name: "Tutup" })).toHaveFocus();
+  });
+
+  it("goes back in history when closing a detail opened from a card, so Back isn't trapped", async () => {
+    const { rerender } = renderWith("");
+    const card = cardLinks().find((a) => a.getAttribute("href") === "/menu?item=aren-latte")!;
+    card.addEventListener("click", (e) => e.preventDefault()); // jsdom can't navigate
+    await userEvent.click(card);
+    nav.params = new URLSearchParams("item=aren-latte");
+    rerender(<MenuCatalog items={getMenu()} />);
+    await userEvent.click(screen.getByRole("button", { name: "Tutup" }));
+    expect(nav.back).toHaveBeenCalledTimes(1);
+    expect(nav.replace).not.toHaveBeenCalled();
+  });
+
+  it("replaces the URL when closing a deep-linked detail (no in-app history to go back to)", async () => {
+    renderWith("item=aren-latte");
+    await userEvent.click(screen.getByRole("button", { name: "Tutup" }));
+    expect(nav.replace).toHaveBeenCalledWith("/menu", { scroll: false });
+    expect(nav.back).not.toHaveBeenCalled();
   });
 });

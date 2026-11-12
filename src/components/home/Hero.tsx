@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { getMenuItem } from "@/lib/menu";
 import { FloatingCard } from "./FloatingCard";
@@ -21,6 +21,29 @@ export function Hero() {
 
   const spanish = getMenuItem("spanish-latte")!;
   const matcha = getMenuItem("matcha-cloud")!;
+
+  // The looping video must be stoppable (WCAG 2.2.2) and stays still for reduced-motion users.
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [paused, setPaused] = useState(false);
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!reduce || !video) return;
+    video.autoplay = false;
+    video.pause();
+    setPaused(true);
+  }, [reduce]);
+
+  const togglePlayback = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (paused) {
+      void video.play()?.catch(() => {});
+      setPaused(false);
+    } else {
+      video.pause();
+      setPaused(true);
+    }
+  };
 
   return (
     <section ref={ref} className="relative overflow-hidden bg-cream">
@@ -54,6 +77,7 @@ export function Hero() {
           <div className="anim-pop" style={delay(0.2)}>
             <div className="relative aspect-[3/4] overflow-hidden rounded-3xl bg-coffee shadow-2xl shadow-coffee/30 md:rounded-[50%_50%_1.5rem_1.5rem/37.5%_37.5%_1.5rem_1.5rem]">
               <video
+                ref={videoRef}
                 className="h-full w-full object-cover"
                 autoPlay
                 muted
@@ -65,6 +89,14 @@ export function Hero() {
               >
                 <source src="/video/hero.mp4" type="video/mp4" />
               </video>
+              <button
+                type="button"
+                onClick={togglePlayback}
+                aria-label={paused ? "Putar video" : "Jeda video"}
+                className="absolute bottom-4 left-1/2 grid h-10 w-10 -translate-x-1/2 place-items-center rounded-full bg-black/40 text-sm text-white backdrop-blur transition hover:bg-black/60 focus-visible:outline-2 focus-visible:outline-white"
+              >
+                <span aria-hidden>{paused ? "▶" : "❚❚"}</span>
+              </button>
             </div>
           </div>
           <FloatingCard item={spanish} className="-left-2 top-[38%] md:-left-12" />

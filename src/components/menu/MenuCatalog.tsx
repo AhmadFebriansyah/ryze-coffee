@@ -18,7 +18,20 @@ export function MenuCatalog({ items }: MenuCatalogProps) {
   const selected = getMenuItem(searchParams.get("item"));
   const lastOpened = useRef<string | null>(null);
 
-  const close = useCallback(() => router.replace("/menu", { scroll: false }), [router]);
+  // A detail opened from a card in this catalog added a history entry: closing goes back,
+  // so the Back button isn't trapped on /menu. Deep links (fresh load, or from Home) replace.
+  const openedInApp = useRef(false);
+  const close = useCallback(() => {
+    if (openedInApp.current) {
+      openedInApp.current = false;
+      router.back();
+    } else {
+      router.replace("/menu", { scroll: false });
+    }
+  }, [router]);
+  const markInAppOpen = (e: React.MouseEvent) => {
+    if ((e.target as HTMLElement).closest("a[data-item]")) openedInApp.current = true;
+  };
 
   // Return focus to the card that opened the detail.
   useEffect(() => {
@@ -35,7 +48,7 @@ export function MenuCatalog({ items }: MenuCatalogProps) {
   return (
     <>
       <CategoryTabs value={category} onChange={setCategory} />
-      <motion.ul layout className="mt-8 grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">
+      <motion.ul layout onClickCapture={markInAppOpen} className="mt-8 grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">
         <AnimatePresence mode="popLayout" initial={false}>
           {visible.map((item, i) => (
             <motion.li

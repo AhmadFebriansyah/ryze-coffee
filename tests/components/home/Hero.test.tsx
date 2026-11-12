@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 import { Hero } from "@/components/home/Hero";
 
@@ -63,5 +64,20 @@ describe("Hero", () => {
   it("enables floating motion by default", () => {
     const { container } = render(<Hero />);
     container.querySelectorAll("[data-motion]").forEach((c) => expect(c).toHaveAttribute("data-motion", "on"));
+  });
+
+  it("lets anyone pause and resume the video", async () => {
+    const pause = vi.spyOn(HTMLMediaElement.prototype, "pause").mockImplementation(() => {});
+    const play = vi.spyOn(HTMLMediaElement.prototype, "play").mockImplementation(() => Promise.resolve());
+    render(<Hero />);
+    const btn = screen.getByRole("button", { name: "Jeda video" });
+    await userEvent.click(btn);
+    expect(pause).toHaveBeenCalled();
+    const resume = screen.getByRole("button", { name: "Putar video" });
+    await userEvent.click(resume);
+    expect(play).toHaveBeenCalled();
+    expect(screen.getByRole("button", { name: "Jeda video" })).toBeInTheDocument();
+    pause.mockRestore();
+    play.mockRestore();
   });
 });

@@ -23,3 +23,14 @@ describe("Hero with prefers-reduced-motion", () => {
     cards.forEach((c) => expect(c).toHaveAttribute("data-motion", "off"));
   });
 });
+
+describe("Hero video with prefers-reduced-motion", () => {
+  it("does not keep the hero video playing", () => {
+    const pause = vi.spyOn(HTMLMediaElement.prototype, "pause").mockImplementation(() => {});
+    const { container } = render(<Hero />);
+    const video = container.querySelector("video")!;
+    expect(pause).toHaveBeenCalled();
+    expect(video.autoplay).toBe(false);
+    pause.mockRestore();
+  });
+});
