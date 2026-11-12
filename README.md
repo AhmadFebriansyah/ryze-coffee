@@ -94,4 +94,4 @@ docs/superpowers/      dokumen desain & rencana pengerjaan
 
 ---
 
-Ryze Coffee adalah brand fiktif. Foto produk dibuat dengan AI.
+Ryze Coffee adalah brand fiktif. Foto produk, toko, dan kebun dibuat dengan AI; video proses dari [Pexels](https://www.pexels.com) (lisensi bebas pakai).
