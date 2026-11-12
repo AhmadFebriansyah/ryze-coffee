@@ -24,7 +24,7 @@ export function Hero() {
 
   return (
     <section ref={ref} className="relative overflow-hidden bg-cream">
-      <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 pb-16 pt-10 md:min-h-[calc(100svh-4rem)] md:grid-cols-[1.1fr_1fr] md:gap-16 md:px-8 md:py-16">
+      <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 pb-16 pt-10 md:min-h-[min(calc(100svh-4rem),52rem)] md:grid-cols-[1.1fr_1fr] md:gap-16 md:px-8 md:py-16">
         <div>
           <p className="anim-rise text-xs font-semibold uppercase tracking-[0.25em] text-brand/70">Signature Ryze</p>
           <h1 className="mt-4 font-display text-5xl font-extrabold leading-[1.02] text-brand sm:text-6xl lg:text-7xl">

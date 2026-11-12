@@ -47,7 +47,7 @@ export function MenuCatalog({ items }: MenuCatalogProps) {
               transition={{ duration: 0.3 }}
               className="relative"
             >
-              <MenuCard item={item} href={`/menu?item=${item.id}`} priority={i < 4} />
+              <MenuCard item={item} href={`/menu?item=${item.id}`} priority={i < 4} keepScroll />
             </motion.li>
           ))}
         </AnimatePresence>

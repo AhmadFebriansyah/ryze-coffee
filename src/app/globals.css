@@ -70,6 +70,17 @@ body {
     float 4s ease-in-out var(--d, 0s) infinite;
 }
 
+/* Scroll reveal — only where scroll-driven animations exist; otherwise content is just shown. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .anim-rise,
   .anim-line,

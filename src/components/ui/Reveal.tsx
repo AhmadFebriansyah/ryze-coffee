@@ -1,24 +1,12 @@
-"use client";
-
-import { motion } from "motion/react";
 import type { ReactNode } from "react";
 
-type RevealProps = { children: ReactNode; delay?: number; className?: string };
+type RevealProps = { children: ReactNode; className?: string };
 
 /**
- * Fades content up once when it scrolls into view. Same markup on server and client;
- * <MotionConfig reducedMotion="user"> removes the movement for reduced-motion users.
+ * Fades content up as it scrolls into view, using a CSS scroll-driven animation (.reveal in
+ * globals.css). Browsers without animation-timeline support, reduced-motion users and no-JS
+ * visitors simply see the content — it is never hidden waiting for JavaScript.
  */
-export function Reveal({ children, delay = 0, className }: RevealProps) {
-  return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay }}
-    >
-      {children}
-    </motion.div>
-  );
+export function Reveal({ children, className = "" }: RevealProps) {
+  return <div className={`reveal ${className}`}>{children}</div>;
 }
