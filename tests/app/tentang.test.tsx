@@ -8,6 +8,17 @@ describe("Tentang page", () => {
     expect(screen.getByRole("heading", { level: 1 })).toBeInTheDocument();
   });
 
+  it("opens over a photo of a Ryze store with light text on a dark overlay", () => {
+    render(<TentangPage />);
+    const h1 = screen.getByRole("heading", { level: 1 });
+    const hero = h1.closest("section")!;
+    const img = hero.querySelector("img")!;
+    expect(img.getAttribute("src")).toContain("interior.webp");
+    expect(img).toHaveClass("object-cover");
+    expect(within(hero).getByTestId("about-hero-overlay")).toBeInTheDocument();
+    expect(h1).toHaveClass("text-cream");
+  });
+
   it("names the three origin regions", () => {
     render(<TentangPage />);
     for (const region of ["Gayo", "Toraja", "Kintamani"]) {

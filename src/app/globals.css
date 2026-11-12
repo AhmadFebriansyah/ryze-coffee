@@ -69,6 +69,25 @@ body {
     translate: 0 -12px;
   }
 }
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+.anim-fade {
+  animation: fade-in 0.8s ease-out both;
+}
+@keyframes progress {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+.anim-progress {
+  animation: progress var(--dur, 7s) linear both;
+}
 /* Slow hover-in-the-air motion for the hero photo; starts after its pop-in. */
 .anim-drift {
   animation: drift 6s ease-in-out 1.2s infinite;
@@ -89,6 +108,7 @@ body {
   .anim-rise,
   .anim-line,
   .anim-pop,
+  .anim-fade,
   .anim-drift {
     animation: none;
   }
