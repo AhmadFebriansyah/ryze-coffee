@@ -26,3 +26,55 @@ body {
   background: var(--color-bg);
   color: var(--color-ink);
 }
+
+/* Entrance animations — pure CSS so content is visible without waiting for JS. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+@keyframes line-up {
+  from {
+    transform: translateY(105%);
+  }
+}
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+}
+@keyframes float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -8px;
+  }
+}
+
+.anim-rise {
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) both;
+}
+.anim-line {
+  animation: line-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) both;
+}
+.anim-pop {
+  animation: pop 0.9s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) both;
+}
+.anim-float {
+  animation:
+    pop 0.5s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) both,
+    float 4s ease-in-out var(--d, 0s) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-rise,
+  .anim-line,
+  .anim-pop,
+  .anim-float {
+    animation: none;
+  }
+}

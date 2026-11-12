@@ -1,14 +1,15 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import type { ReactNode } from "react";
 
 type RevealProps = { children: ReactNode; delay?: number; className?: string };
 
-/** Fades content up once when it scrolls into view. Static under reduced motion. */
+/**
+ * Fades content up once when it scrolls into view. Same markup on server and client;
+ * <MotionConfig reducedMotion="user"> removes the movement for reduced-motion users.
+ */
 export function Reveal({ children, delay = 0, className }: RevealProps) {
-  const reduce = useReducedMotion();
-  if (reduce) return <div className={className}>{children}</div>;
   return (
     <motion.div
       className={className}
