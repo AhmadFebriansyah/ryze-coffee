@@ -1,4 +1,4 @@
-import { CATEGORIES, filterByCategory, getFeatured, getMenu, getMenuItem } from "@/lib/menu";
+import { CATEGORIES, categoryLabel, filterByCategory, getFeatured, getMenu, getMenuItem } from "@/lib/menu";
 
 describe("getMenu", () => {
   const menu = getMenu();
@@ -27,6 +27,12 @@ describe("getMenu", () => {
 describe("CATEGORIES", () => {
   it("labels the three categories", () => {
     expect(CATEGORIES.map((c) => c.label)).toEqual(["Signature", "Classic Coffee", "Non-Coffee"]);
+  });
+});
+
+describe("categoryLabel", () => {
+  it("maps a category id to its label", () => {
+    expect(categoryLabel("non-coffee")).toBe("Non-Coffee");
   });
 });
 
