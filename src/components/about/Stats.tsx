@@ -3,7 +3,7 @@ import { getStores } from "@/lib/stores";
 
 export function Stats() {
   const stats = [
-    { value: String(getStores().length), label: "cabang di 4 kota" },
+    { value: String(getStores().length), label: `cabang di ${new Set(getStores().map((s) => s.city)).size} kota` },
     { value: "12", label: "petani mitra" },
     { value: "250rb+", label: "gelas tersaji" },
   ];

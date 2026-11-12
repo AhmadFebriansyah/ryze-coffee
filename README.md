@@ -32,7 +32,7 @@ Perintah lain:
 
 - **Menu** → `data/menu.json` (nama, kategori, harga, deskripsi, label `best-seller` / `new`, `featured` untuk
   4 menu unggulan di Beranda).
-- **Toko** → `data/stores.json` (nama, kota, alamat, jam buka, `mapQuery` untuk peta).
+- **Toko** → `data/stores.json` (nama, kota, alamat, jam buka, `mapQuery` untuk tautan Google Maps, `tag` opsional seperti "Nuansa alam"). Foto toko: `public/stores/<id>.webp` (16:10).
 
 ## Mengganti foto menu
 

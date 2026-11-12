@@ -19,9 +19,8 @@ export function ProcessSteps() {
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [active, setActive] = useState(0);
-  // null = the visitor hasn't chosen; reduced-motion visitors then get a still background.
-  const [userPaused, setPaused] = useState<boolean | null>(null);
-  const paused = userPaused ?? !!reduce;
+  // Plays on its own; only visitors who asked their system for reduced motion get a still background.
+  const paused = !!reduce;
   const [inView, setInView] = useState(false);
 
   // Only fetch and play the clips while the section is on screen.
@@ -41,17 +40,6 @@ export function ProcessSteps() {
   }, [active, inView, paused]);
 
   const next = () => setActive((i) => (i + 1) % STEPS.length);
-
-  const togglePlayback = () => {
-    const video = videoRef.current;
-    if (paused) {
-      void video?.play()?.catch(() => {});
-      setPaused(false);
-    } else {
-      video?.pause();
-      setPaused(true);
-    }
-  };
 
   return (
     <section ref={sectionRef} className="relative isolate overflow-hidden bg-brand py-20 text-cream md:py-28">
@@ -77,21 +65,11 @@ export function ProcessSteps() {
       />
 
       <div className="mx-auto max-w-6xl px-4 md:px-8">
-        <Reveal className="flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-cream/70">Proses kami</p>
-            <h2 id="process-title" className="mt-3 font-display text-3xl font-extrabold md:text-5xl">
-              Dari biji ke gelas
-            </h2>
-          </div>
-          <button
-            type="button"
-            onClick={togglePlayback}
-            aria-label={paused ? "Putar video" : "Jeda video"}
-            className="grid h-11 w-11 place-items-center rounded-full border border-cream/40 bg-cream/10 text-sm backdrop-blur transition hover:bg-cream/20 focus-visible:outline-2 focus-visible:outline-cream"
-          >
-            <span aria-hidden>{paused ? "▶" : "❚❚"}</span>
-          </button>
+        <Reveal>
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-cream/70">Proses kami</p>
+          <h2 id="process-title" className="mt-3 font-display text-3xl font-extrabold md:text-5xl">
+            Dari biji ke gelas
+          </h2>
         </Reveal>
 
         <ol aria-label="Dari biji ke gelas" className="mt-14 grid gap-8 sm:grid-cols-2 md:mt-24 lg:grid-cols-4">

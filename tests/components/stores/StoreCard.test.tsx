@@ -3,6 +3,7 @@ import { StoreCard } from "@/components/stores/StoreCard";
 import { getStores } from "@/lib/stores";
 
 const store = getStores()[0];
+const nature = getStores().find((s) => s.tag)!;
 
 describe("StoreCard", () => {
   it("shows name, city, address and hours", () => {
@@ -13,15 +14,17 @@ describe("StoreCard", () => {
     expect(screen.getByText(store.hours)).toBeInTheDocument();
   });
 
-  it("embeds a lazy-loaded map for the store", () => {
-    render(<StoreCard store={store} />);
-    const map = screen.getByTitle(`Peta ${store.name}`);
-    expect(map.tagName).toBe("IFRAME");
-    expect(map).toHaveAttribute("loading", "lazy");
-    expect(map).toHaveAttribute(
-      "src",
-      `https://maps.google.com/maps?q=${encodeURIComponent(store.mapQuery)}&output=embed`,
-    );
+  it("shows a photo of the store instead of a map", () => {
+    const { container } = render(<StoreCard store={store} />);
+    const img = screen.getByRole("img", { name: `Suasana ${store.name}` });
+    expect(img.getAttribute("src")).toContain(encodeURIComponent(store.image));
+    expect(img).toHaveClass("object-cover");
+    expect(container.querySelector("iframe")).toBeNull();
+  });
+
+  it("labels stores with a special atmosphere", () => {
+    render(<StoreCard store={nature} />);
+    expect(screen.getByText(nature.tag!)).toBeInTheDocument();
   });
 
   it("links to Google Maps in a new tab", () => {

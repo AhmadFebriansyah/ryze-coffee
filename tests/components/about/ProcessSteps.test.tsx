@@ -1,5 +1,4 @@
 import { act, fireEvent, render, screen, within } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 import { CLIP_SECONDS, ProcessSteps } from "@/components/about/ProcessSteps";
 
@@ -52,11 +51,8 @@ describe("ProcessSteps", () => {
     expect(steps()[0]).toHaveAttribute("aria-current", "step");
   });
 
-  it("lets anyone pause and resume the video", async () => {
+  it("runs on its own without a pause button", () => {
     render(<ProcessSteps />);
-    await userEvent.click(screen.getByRole("button", { name: "Jeda video" }));
-    expect(HTMLMediaElement.prototype.pause).toHaveBeenCalled();
-    await userEvent.click(screen.getByRole("button", { name: "Putar video" }));
-    expect(HTMLMediaElement.prototype.play).toHaveBeenCalled();
+    expect(screen.queryByRole("button")).not.toBeInTheDocument();
   });
 });

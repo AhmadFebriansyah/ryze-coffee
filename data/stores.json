@@ -1,34 +1,40 @@
 [
   {
-    "id": "jakarta-kemang",
-    "name": "Ryze Kemang",
+    "id": "jakarta-senopati",
+    "name": "Ryze Senopati",
     "city": "Jakarta Selatan",
-    "address": "Jl. Kemang Raya No. 12, Bangka, Mampang Prapatan",
+    "address": "Jl. Senopati No. 27, Selong, Kebayoran Baru",
     "hours": "07.00 – 22.00",
-    "mapQuery": "Kemang Raya, Jakarta Selatan"
+    "mapQuery": "Senopati, Jakarta Selatan",
+    "image": "/stores/jakarta-senopati.webp"
   },
   {
-    "id": "bandung-dago",
-    "name": "Ryze Dago",
-    "city": "Bandung",
-    "address": "Jl. Ir. H. Juanda No. 88, Dago, Coblong",
+    "id": "bekasi-summarecon",
+    "name": "Ryze Summarecon Bekasi",
+    "city": "Bekasi",
+    "address": "Jl. Bulevar Selatan No. 8, Marga Mulya, Bekasi Utara",
     "hours": "08.00 – 22.00",
-    "mapQuery": "Dago, Bandung"
+    "mapQuery": "Summarecon Bekasi",
+    "image": "/stores/bekasi-summarecon.webp"
   },
   {
-    "id": "surabaya-darmo",
-    "name": "Ryze Darmo",
-    "city": "Surabaya",
-    "address": "Jl. Raya Darmo No. 45, Darmo, Wonokromo",
-    "hours": "07.00 – 23.00",
-    "mapQuery": "Darmo, Surabaya"
+    "id": "bogor-puncak",
+    "name": "Ryze Puncak",
+    "city": "Bogor",
+    "address": "Jl. Raya Puncak KM 79, Tugu Selatan, Cisarua",
+    "hours": "07.00 – 21.00",
+    "mapQuery": "Tugu Selatan, Cisarua, Bogor",
+    "image": "/stores/bogor-puncak.webp",
+    "tag": "Nuansa alam"
   },
   {
-    "id": "yogyakarta-prawirotaman",
-    "name": "Ryze Prawirotaman",
-    "city": "Yogyakarta",
-    "address": "Jl. Prawirotaman No. 21, Brontokusuman, Mergangsan",
-    "hours": "08.00 – 23.00",
-    "mapQuery": "Prawirotaman, Yogyakarta"
+    "id": "sukabumi-selabintana",
+    "name": "Ryze Selabintana",
+    "city": "Sukabumi",
+    "address": "Jl. Selabintana KM 7, Sudajaya Girang, Sukabumi",
+    "hours": "07.00 – 21.00",
+    "mapQuery": "Selabintana, Sukabumi",
+    "image": "/stores/sukabumi-selabintana.webp",
+    "tag": "Nuansa alam"
   }
 ]

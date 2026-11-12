@@ -30,7 +30,7 @@ export function Origins() {
     <section className="mx-auto max-w-6xl px-4 py-20 md:px-8 md:py-24">
       <Reveal>
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand/70">Asal biji</p>
-        <h2 className="mt-3 max-w-2xl font-display text-3xl font-extrabold leading-tight text-brand md:text-5xl">
+        <h2 className="mt-3 font-display text-3xl font-extrabold leading-tight text-brand md:text-5xl">
           Tiga daerah, satu racikan khas.
         </h2>
       </Reveal>
